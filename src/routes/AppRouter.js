@@ -4,6 +4,7 @@ import Index from "../components/Index"
 import LoginForm from "../components/LoginForm"
 import Menu from "../components/Menu"
 import NotFound from "../components/NotFound"
+import RegisterForm from "../components/RegisterForm"
 import Secret from "../components/Secret"
 import PrivateRoute from "./PrivateRoute"
 import PublicRoute from "./PublicRoute"
@@ -17,6 +18,7 @@ export default function AppRouter() {
                 <PrivateRoute exact path="/secret" component={Secret} />
                 <PrivateRoute exact path="/admin" component={Admin} />
                 <PublicRoute exact path="/login" component={LoginForm} />
+                <PublicRoute exact path="/register" component={RegisterForm} />
                 <Route exact path="/" component={Index} />
                 <Route path="*" component={NotFound} />
             </Switch>

@@ -22,40 +22,29 @@ const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
-    //console.log(user)
+    console.log(user)
   } catch (err) {
     console.log(err)
   }
-};
+}
 
-const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    //console.log(user)
-  } catch (err) {
-    console.log(err.code)
-  }
-};
+const logInWithEmailAndPassword = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
+}
 
-const registerWithEmailAndPassword = async (email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    //console.log(user)
-  } catch (err) {
-    console.log(err.code)
-  }
-};
+const registerWithEmailAndPassword = (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password)
+}
 
 const logout = () => {
   signOut(auth);
-};
+}
 
 export {
+  app,
   auth,
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   logout,
-};
+}

@@ -9,7 +9,7 @@ export default function PrivateRoute({ component: Component, props }) {
 
   return (
     <>
-    {auth.isLoading && !auth.user ? (<Loading />) 
+    {auth.isLoading ? (<Loading />) 
       : 
       (<Route {...props} >
         {auth.user ? <Component /> : <Redirect to="/login"/> }                                

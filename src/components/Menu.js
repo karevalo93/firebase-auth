@@ -15,10 +15,8 @@ export default function Menu() {
 
     return (
         <Navbar
-        color="light"
-        expand="md"
-        light
-        className="navbar navbar-dark bg-dark">
+        color="dark"
+        >
             <Nav >
 
                 <NavItem>
@@ -42,7 +40,7 @@ export default function Menu() {
             </Nav>
 
             {auth.user ?
-                <Button color="danger" className="me-3" onClick={handleLogout}>Logout</Button>
+                <Button color="danger" onClick={handleLogout}>Logout</Button>
                 :
                 <span></span>
             }
