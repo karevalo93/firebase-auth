@@ -11,13 +11,9 @@ export default function RegisterForm() {
     const [error, setError] = useState(null)
     const [isValid, setIsValid] = useState(null)
 
-    const validate = () => {
-        { password < 2 ? setIsValid(false) : setIsValid(true) }
+    const validatePassword = () => {
+        {password.length < 1 ?setIsValid(true)  : setIsValid(false)}
     }
-
-    useEffect(() => {
-        validate()
-    }, [password])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,15 +22,20 @@ export default function RegisterForm() {
             history.push("/")
         } catch (err) {
             if (err.code === 'auth/email-already-in-use') {
-                setError("Email already in use")
+                setError("Email already in use!")
             }
             if (err.code === 'auth/weak-password') {
-                setError("Password should be at least 6 characters")
+                setError("Password is too short (minimum is 6 characters)")
             }
             if (err.code === "auth/invalid-email") {
                 setError("Please enter a valid email")
             }
         }
+    }
+
+    const onChangePassword = (e) => {
+        setPassword(e.target.value);
+        validatePassword()
     }
 
     return (
@@ -45,7 +46,6 @@ export default function RegisterForm() {
                     {error ? <Alert id="alert-warning" color="warning">{error}</Alert> : <span></span>}
                     <FormGroup >
                         <Input
-                            id="exampleEmail"
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -55,19 +55,18 @@ export default function RegisterForm() {
                     </FormGroup>
                     <FormGroup>
                         <Input
-                            id="examplePassword"
                             name="password"
                             value={password.value}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={onChangePassword}
                             placeholder="Password"
                             type="password"
-                            invalid={!isValid}
+                            invalid={isValid}
                         />
                         <FormFeedback>
                             {"Name is too short (minimum is 2 characters)"}
                         </FormFeedback>
                     </FormGroup>
-                    <FormGroup className="d-grid gap-2">
+                    <FormGroup className="d-grid">
                         <Button color="success">
                             Register
                         </Button>
